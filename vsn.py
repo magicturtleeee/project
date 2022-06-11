@@ -48,3 +48,9 @@ for ind, row in gdf.iterrows():
     folium.Marker([row.lon, row.lat],
                       radius=12, fill_color='red').add_to(m)
 map=st_folium(m)
+
+gdf2=pd.read_csv('moscow.csv')
+gdf2=gpd.GeoDataFrame(gdf2, geometry='poly')
+gdf2
+gdften=gdf2.sjoin(gdf,predicate="intersects",how='inner')
+gdften
