@@ -2,4 +2,4 @@ plotly
 folium
 streamlit_folium
 geopandas
-pygeos
+rtree
