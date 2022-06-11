@@ -1,11 +1,13 @@
 import pandas as pd
 import streamlit as st
+import cufflinks
 import plotly.express as px
 import requests
 import folium
 import re
 import json
 import requests
+import geopandas as gpd
 import streamlit_folium as st_folium
 
 st.title('Финальный проект.')
@@ -37,10 +39,14 @@ st.subheader('Обработаем data frame через pandas и постро�
 
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
 st.subheader("Сейчас, используя api ключ с сайта data.mos, получим данные в формате geojson. Покажем это на карте с помощью folium.")
-response = requests.get('https://apidata.mos.ru/v1/datasets/2135/features?api_key=15a39b704af4f427f3b82578923edec8')
-r=response.json()
+
 
 m = folium.Map([55.75364, 37.648280], zoom_start=10)
-folium.GeoJson(r, name='geojson').add_to(m)
-a=st_folium(m)
-a
+l=pd.read_csv('courts.csv')
+gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
+st.write(gdf)
+m = folium.Map([55.75364, 37.648280], zoom_start=15)
+for ind, row in gdf1.iterrows():
+    folium.Marker([row.lon, row.lat],
+                      radius=12, fill_color='red', tooltip=row.name).add_to(m)
+map=st_folium(m)
