@@ -56,7 +56,7 @@ gdf2=pd.read_csv('moscow.csv')
 gdf2['poly']=gpd.GeoSeries.from_wkt(gdf2['poly'])
 gdf1=gpd.GeoDataFrame(gdf2, geometry='poly')
 gdf1
-gdften=gdf.sjoin(gdf1,predicate="intersects",how='inner')
+gdften=gdf2.sjoin(gdf1,predicate="intersects",how='inner')
 gdften
 num=gdften['index_right'].value_counts()
 d=gdf1.merge(num,left_index=True,right_index=True)
