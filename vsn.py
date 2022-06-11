@@ -7,7 +7,8 @@ import re
 import json
 import requests
 import geopandas as gpd
-import streamlit_folium as st_folium
+import streamlit_folium
+from streamlit_folium import st_folium
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium и сохранила в файл wta.csv. Это можно увидеть в tennis data.py.')
