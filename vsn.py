@@ -45,7 +45,7 @@ l=pd.read_csv('courts.csv')
 gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
 st.write(gdf)
 m = folium.Map([55.75364, 37.648280], zoom_start=15)
-for ind, row in gdf1.iterrows():
+for ind, row in gdf.iterrows():
     folium.Marker([row.lon, row.lat],
                       radius=12, fill_color='red', tooltip=row.name).add_to(m)
 map=st_folium(m)
