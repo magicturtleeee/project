@@ -40,12 +40,10 @@ st.subheader('Обработаем data frame через pandas и постро�
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
 st.subheader("Сейчас, используя api ключ с сайта data.mos, получим данные в формате geojson. Покажем это на карте с помощью folium.")
 
-
-m = folium.Map([55.75364, 37.648280], zoom_start=10)
 l=pd.read_csv('courts.csv')
 gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
 st.write(gdf)
-m = folium.Map([55.75364, 37.648280], zoom_start=15)
+m = folium.Map([55.75364, 37.648280], zoom_start=10)
 for ind, row in gdf.iterrows():
     folium.Marker([row.lon, row.lat],
                       radius=12, fill_color='red', tooltip=row.name).add_to(m)
