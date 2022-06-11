@@ -42,4 +42,5 @@ r=response.json()
 
 m = folium.Map([55.75364, 37.648280], zoom_start=10)
 folium.GeoJson(r, name='geojson').add_to(m)
-st_folium(m)
+a=st_folium(m)
+a
