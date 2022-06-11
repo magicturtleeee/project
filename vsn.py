@@ -58,4 +58,5 @@ gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner')
 gdften
 num=gdften['index_right'].value_counts()
 d=gdf1.merge(num,left_index=True,right_index=True)
-#d.plot(column='index_right', cmap='PuRd', legend=True)
+figure=d.plot(column='index_right', cmap='PuRd', legend=True)
+st.pyplot(figure)
