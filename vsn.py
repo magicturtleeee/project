@@ -46,5 +46,5 @@ st.write(gdf)
 m = folium.Map([55.75364, 37.648280], zoom_start=10)
 for ind, row in gdf.iterrows():
     folium.Marker([row.lon, row.lat],
-                      radius=12, fill_color='red', tooltip=row.name).add_to(m)
+                      radius=12, fill_color='red').add_to(m)
 map=st_folium(m)
