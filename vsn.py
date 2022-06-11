@@ -49,8 +49,12 @@ for ind, row in gdf.iterrows():
                       radius=12, fill_color='red').add_to(m)
 map=st_folium(m)
 
+gdfnew = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lat'], l['lon']))
 gdf2=pd.read_csv('moscow.csv')
-gdf2=gpd.GeoDataFrame(gdf2, geometry='poly')
-gdf2
-gdften=gdf2.sjoin(gdf,predicate="intersects",how='inner')
-gdften
+gdf2['poly']=gpd.GeoSeries.from_wkt(gdf2['poly'])
+gdf1=gpd.GeoDataFrame(gdf2, geometry='poly')
+gdf1
+gdften=gdf.sjoin(gdf1,predicate="intersects",how='inner')
+num=gdften['index_right'].value_counts()
+d=gdf1.merge(num,left_index=True,right_index=True)
+d.plot(column='index_right', cmap='PuRd', legend=True)
