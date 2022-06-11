@@ -7,6 +7,7 @@ import folium
 import re
 import json
 import requests
+import streamlit_folium as st_folium
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium и сохранила в файл wta.csv. Это можно увидеть в tennis data.py.')
@@ -42,4 +43,4 @@ r=response.json()
 
 m = folium.Map([55.75364, 37.648280], zoom_start=10)
 folium.GeoJson(r, name='geojson').add_to(m)
-m
+st_folium(m)
