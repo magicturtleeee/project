@@ -108,6 +108,7 @@ choropleth=folium.Choropleth(geo_data=gdfjson, data=an, columns=['name','num'],
 choropleth.geojson.add_child(folium.features.GeoJsonTooltip(['name'],labels=False))
 map1=st_folium(m1)
 
+st.subheader('Сейчас давайте посмотрим на один из турниров большого шлема, например, Australian Open. В основной сетке WTA 128 человек. Играют на вылет. Такую сетку удобно представить в форме графа с помощью библиотеки networkx.В центре победительница турнира, справа и слева от нее она и другая участница финала и т.д.')
 T = nx.generators.balanced_tree(2, 7)
 nx.draw(T)
 fig, ax = plt.subplots()
