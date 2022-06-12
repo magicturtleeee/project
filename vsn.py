@@ -69,7 +69,7 @@ gdfjson=json.loads(gdfjson)
 
 folium.Choropleth(geo_data=gdfjson, data=an, columns=['name','num'],
                       key_on='feature.properties.name',
-                      fill_color='BuPu',
+                      fill_color='PuRd',
                       fill_opacity=0.7,
                       line_opacity=0.2,
                       legend_name='num',
