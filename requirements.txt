@@ -7,3 +7,5 @@ matplotlib
 sklearn
 networkx
 pydot
+graphviz
+pygraphviz
