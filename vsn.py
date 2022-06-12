@@ -14,13 +14,13 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 
 st.title('Финальный проект.')
-st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium и сохранила в файл wta.csv. Это можно увидеть в tennis data.py.')
+st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium, используя регулярные выражение, и сохранила в файл wta.csv. Это можно увидеть в tennis data.py. На всякий случай, продублирую в конце кода.')
 a=pd.read_csv('wta.csv')
 st.write(a)
 
-st.write('Сейчас давайте займемся визуализацией данных. Для этого используем библиотеку plotly.express. У вас есть возможность выбрать, в каком формате вы хотите видеть игрока (номер в рейтинге WTA или имя), выбрать, хотите ли видеть один параметр или несколько.')
-xpar=st.selectbox('In what format do you want to see the player?', a.columns[:2])
-ypar=st.selectbox('Select a parameter.', a.columns[2::])
+st.subheader('Сейчас давайте займемся визуализацией данных. Для этого используем библиотеку plotly.express. У вас есть возможность выбрать, в каком формате вы хотите видеть игрока (номер в рейтинге WTA или имя), выбрать, хотите ли видеть один параметр или несколько.')
+xpar=st.selectbox('В каком формате вы хотите увидеть игрока?', a.columns[:2])
+ypar=st.selectbox('Выберете параметр.', a.columns[2::])
 
 fig=px.bar(a, x=xpar, y=ypar, title='Data on WTA top 20 players',
             labels=dict(index='player'+xpar, value=ypar))
@@ -28,12 +28,12 @@ st.plotly_chart(fig)
 
 st.write('Покажем, что если у игрока рейтинг выше, необязательно у него больше эйсов, меньше двойных и т.д. Сейчас вы можете выиграть несколько параметров, которые вы увидите на графике.')
 
-c=st.multiselect('What data do you want to plot?', a.columns[2:5])
+c=st.multiselect('Какие данные вы хотите увидеть? Можно выбрать несколько параметров.', a.columns[2:5])
 fig1=px.line(a, x=xpar, y=c)
 st.plotly_chart(fig1)
 
 st.write('Сейчас посмотрим на параметры, которые мы измеряем в процентах.')
-c1=c=st.multiselect('What data do you want to plot?', a.columns[5::])
+c1=c=st.multiselect('Какие данные вы хотите увидеть? Можно выбрать несколько параметров.', a.columns[5::])
 fig2=px.line(a, x=xpar, y=c1)
 st.plotly_chart(fig2)
 
@@ -63,7 +63,7 @@ if len(c1)==2:
 
 
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
-st.subheader("Сейчас, используя api ключ с сайта data.mos, получим данные в формате geojson. Покажем это на карте с помощью folium.")
+st.subheader("Используя api ключ с сайта data.mos, я получила данные в формате geojson. Так как streamlit не смог открыть российский сайт, я преобразовала данные в дата фрейм, сохранила в формате csv. Сейчас покажем все теннисные корты Москвы на карте с помощью folium.")
 
 l=pd.read_csv('courts.csv')
 gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
@@ -74,6 +74,7 @@ for ind, row in gdf.iterrows():
                       radius=12, fill_color='red').add_to(m)
 map=st_folium(m)
 
+st.subheader("Мне захотелось сделать красивую розовую визуализацию, поэтому давайте закрасим районы Москвы, в зависимости от того, сколько там теннисных кортов.")
 gdfnew = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lat'], l['lon']))
 gdf2=pd.read_csv('moscow.csv')
 gdf2['poly']=gpd.GeoSeries.from_wkt(gdf2['poly'])
