@@ -53,7 +53,7 @@ model.fit(fs, fsp)
 st.write('Получаем коэффициент модели', model.coef_[0], 'и константу', model.intercept_)
 st.write('Сейчас вы можете написать число % попадания первых подач (целое число) , и программа предскажет, какая доля из этих мячей выиграна.')
 number=st.number_input('Insert a number.')
-st.subheader(model.predict(pd.DataFrame([[number/100]], columns=["first serve %"])), 'or', model.predict(pd.DataFrame([[number/100]], columns=["first serve %"])[0],'%')))
+st.subheader(model.predict(pd.DataFrame([[number/100]], columns=["first serve %"])), 'or', model.predict(pd.DataFrame([[number/100]], columns=["first serve %"])[0],'%'))
             
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
 st.subheader("Сейчас, используя api ключ с сайта data.mos, получим данные в формате geojson. Покажем это на карте с помощью folium.")
