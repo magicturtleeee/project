@@ -109,7 +109,9 @@ choropleth=folium.Choropleth(geo_data=gdfjson, data=an, columns=['name','num'],
 choropleth.geojson.add_child(folium.features.GeoJsonTooltip(['name'],labels=False))
 map1=st_folium(m1)
 
-T = nx.balanced_tree(2, 7)
-pos = graphviz_layout(T, prog="dot")
-nx.draw(T, pos)
-plt.show()
+T = nx.generators.balanced_tree(2, 7)
+nx.draw(T)
+fig, ax = plt.subplots()
+pos = nx.kamada_kawai_layout(T,)
+nx.draw(T,pos, with_labels=True)
+st.pyplot(fig)
