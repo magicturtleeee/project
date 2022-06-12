@@ -9,6 +9,7 @@ import requests
 import geopandas as gpd
 import streamlit_folium
 from streamlit_folium import st_folium
+import matplotlib.pyplot as plt
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium и сохранила в файл wta.csv. Это можно увидеть в tennis data.py.')
@@ -59,5 +60,6 @@ gdften
 num=gdften['index_right'].value_counts()
 d=gdf1.merge(num,left_index=True,right_index=True)
 st.set_option('deprecation.showPyplotGlobalUse', False)
-d.plot(column='index_right', cmap='PuRd', legend=True)
-st.pyplot(d)
+fig,ax=plt.subplots(1,1)
+d.plot(column='index_right', ax=ax, cmap='PuRd', legend=True)
+st.pyplot(fig)
