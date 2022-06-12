@@ -59,8 +59,9 @@ st.markdown('Используя возможности numpy, посчитаем
 rat=np.array(a['rating'])
 mp=np.array(a['matches played'])
 aces=np.array(a['aces'])
-c1=st.multiselect('Между какими двумя параметрами рассчитаем матрицу корреляций.', a.columns[1::])
-st.write(np.corrcoef(np.array(a[c1[0]]),np.array(a[c1[1]])))
+c1=st.multiselect('Между какими двумя параметрами рассчитаем матрицу корреляций. Выводится матрица будет, только если выбрано 2 параметра.', a.columns[1:5])
+if len(c1)==2:
+            st.write(np.corrcoef(np.array(a[c1[0]]),np.array(a[c1[1]])))
 
 
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
