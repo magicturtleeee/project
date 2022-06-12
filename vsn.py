@@ -15,6 +15,8 @@ import numpy as np
 import networkx as nx
 import pydot
 from networkx.drawing.nx_pydot import graphviz_layout
+import graphviz
+import pygraphviz
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium, используя регулярные выражение, и сохранила в файл wta.csv. Это можно увидеть в tennis data.py. На всякий случай, продублирую в конце кода.')
