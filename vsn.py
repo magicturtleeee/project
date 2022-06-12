@@ -47,7 +47,7 @@ fsp=list(df['first serve points %'])
 fsp=[float(x[:-1]) for x in fsp]
 fsp=np.array(fsp)/100
 model.fit(a, b)
-st.write('Получаем коэффициент модели', model.coef_, 'и константу', model.intercept_).
+st.write('Получаем коэффициент модели', model.coef_, 'и константу', model.intercept_)
             
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
 st.subheader("Сейчас, используя api ключ с сайта data.mos, получим данные в формате geojson. Покажем это на карте с помощью folium.")
