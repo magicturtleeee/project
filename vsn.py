@@ -54,10 +54,25 @@ gdfnew = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lat'], l['lon']))
 gdf2=pd.read_csv('moscow.csv')
 gdf2['poly']=gpd.GeoSeries.from_wkt(gdf2['poly'])
 gdf1=gpd.GeoDataFrame(gdf2, geometry='poly')
-gdf1
+gdf1.crs = "EPSG:4326"
 gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner')
-gdften
 num=gdften['name_left'].value_counts()
 an=gdf1.set_index('name').assign(num=num)
-st.write(an)
+an=an.reset_index()
+an=an.fillna(0)
+an['num'].astype('int')
+an['name'].astype('str')
 
+m1 = folium.Map([55.75364, 37.648280], zoom_start=10)
+gdfjson=gdf1.to_json()
+gdfjson=json.loads(gdfjson)
+
+folium.Choropleth(geo_data=gdfjson, data=an, columns=['name','num'],
+                      key_on='feature.properties.name',
+                      fill_color='BuPu',
+                      fill_opacity=0.7,
+                      line_opacity=0.2,
+                      legend_name='num',
+                      highlight=True,
+                      reset=True).add_to(m1)
+map1=st_folium(m1)
