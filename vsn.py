@@ -43,7 +43,7 @@ st.markdown('Но сначала нам нужно привести данные
 fs=list(a['first serve %'])
 fs=[float(x[:-1]) for x in fs]
 fs=np.array(fs)/100
-fs=fs.reshape(1, -1)
+fs=fs.reshape(-1, 1)
 fsp=list(a['first serve points %'])
 fsp=[float(x[:-1]) for x in fsp]
 fsp=np.array(fsp)/100
