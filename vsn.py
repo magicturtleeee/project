@@ -60,6 +60,7 @@ rat=np.array(a['rating'])
 mp=np.array(a['matches played'])
 aces=np.array(a['aces'])
 c1=st.multiselect('Между какими двумя параметрами рассчитаем матрицу корреляций.', a.columns[2:5])
+st.subheader(corrcoef(np.array(a[c1[0]]),np.array(a[c1[1]]))
 
 
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
