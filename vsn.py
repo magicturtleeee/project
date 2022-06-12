@@ -12,6 +12,9 @@ from streamlit_folium import st_folium
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 import numpy as np
+import networkx as nx
+import pydot
+from networkx.drawing.nx_pydot import graphviz_layout
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium, используя регулярные выражение, и сохранила в файл wta.csv. Это можно увидеть в tennis data.py. На всякий случай, продублирую в конце кода.')
@@ -103,3 +106,8 @@ choropleth=folium.Choropleth(geo_data=gdfjson, data=an, columns=['name','num'],
                       reset=True).add_to(m1)
 choropleth.geojson.add_child(folium.features.GeoJsonTooltip(['name'],labels=False))
 map1=st_folium(m1)
+
+T = nx.balanced_tree(2, 7)
+pos = graphviz_layout(T, prog="dot")
+nx.draw(T, pos)
+plt.show()
