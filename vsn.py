@@ -58,11 +58,11 @@ gdf1.crs = "EPSG:4326"
 gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner')
 num=gdften['name_left'].value_counts()
 an=gdf1.set_index('name').assign(num=num)
+an.crs = "EPSG:4326"
 an=an.reset_index()
 an=an.fillna(0)
 an['num'].astype('int')
 an['name'].astype('str')
-an.crs = "EPSG:4326"
 
 m1 = folium.Map([55.75364, 37.648280], zoom_start=10)
 gdfjson=gdf1.to_json()
