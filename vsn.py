@@ -62,6 +62,7 @@ an=an.reset_index()
 an=an.fillna(0)
 an['num'].astype('int')
 an['name'].astype('str')
+an.crs = "EPSG:4326"
 
 m1 = folium.Map([55.75364, 37.648280], zoom_start=10)
 gdfjson=gdf1.to_json()
