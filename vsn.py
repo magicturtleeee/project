@@ -57,7 +57,7 @@ gdf1=gpd.GeoDataFrame(gdf2, geometry='poly')
 gdf1
 gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner')
 gdften
-num=gdften['name_right'].value_counts()
+num=gdften['name_left'].value_counts()
 an=gdf1.set_index('name').assign(num=num)
 st.write(an)
 
