@@ -40,7 +40,7 @@ st.markdown('Сейчас, используя машинное обучение,
 st.markdown('Но сначала нам нужно привести данные с процентом к виду чисел в долях. Для этого используем регулярные выражения и математические операции над numpy array-ми.')
 
 fs=list(a['first serve %'])
-fs=[float(x[:-1]) for x in a]
+fs=[float(x[:-1]) for x in fs]
 fs=np.array(fs)/100
 fs=fs.reshape(1, -1)
 fsp=list(a['first serve points %'])
