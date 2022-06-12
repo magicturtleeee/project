@@ -10,6 +10,7 @@ import geopandas as gpd
 import streamlit_folium
 from streamlit_folium import st_folium
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium и сохранила в файл wta.csv. Это можно увидеть в tennis data.py.')
@@ -35,9 +36,19 @@ c1=c=st.multiselect('What data do you want to plot?', a.columns[5::])
 fig2=px.line(a, x=xpar, y=c1)
 st.plotly_chart(fig2)
 
-st.subheader('Обработаем data frame через pandas и построим для каждой теннисистки отдельный график.')
+st.markdown('Сейчас, используя машинное обучение, попробуем предсказать процент выигранных мячей с первых подач. Для этого используем линейную регрессию.')
+st.markdown('Но сначала нам нужно привести данные с процентом к виду чисел в долях. Для этого используем регулярные выражения и математические операции над numpy array'ями.')
 
-
+fs=list(df['first serve %'])
+fs=[float(x[:-1]) for x in a]
+fs=np.array(fs)/100
+fs=fs.reshape(1, -1)
+fsp=list(df['first serve points %'])
+fsp=[float(x[:-1]) for x in fsp]
+fsp=np.array(fsp)/100
+model.fit(a, b)
+st.write('Получаем коэффициент модели', model.coef_, 'и константу', model.intercept_).
+            
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
 st.subheader("Сейчас, используя api ключ с сайта data.mos, получим данные в формате geojson. Покажем это на карте с помощью folium.")
 
