@@ -39,14 +39,14 @@ st.plotly_chart(fig2)
 st.markdown('Сейчас, используя машинное обучение, попробуем предсказать процент выигранных мячей с первых подач. Для этого используем линейную регрессию.')
 st.markdown('Но сначала нам нужно привести данные с процентом к виду чисел в долях. Для этого используем регулярные выражения и математические операции над numpy array-ми.')
 
-fs=list(df['first serve %'])
+fs=list(a['first serve %'])
 fs=[float(x[:-1]) for x in a]
 fs=np.array(fs)/100
 fs=fs.reshape(1, -1)
-fsp=list(df['first serve points %'])
+fsp=list(a['first serve points %'])
 fsp=[float(x[:-1]) for x in fsp]
 fsp=np.array(fsp)/100
-model.fit(a, b)
+model.fit(fs, fsp)
 st.write('Получаем коэффициент модели', model.coef_, 'и константу', model.intercept_)
             
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
