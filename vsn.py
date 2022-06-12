@@ -51,7 +51,7 @@ fsp=np.array(fsp)/100
 model = LinearRegression()
 model.fit(fs, fsp)
 st.write('Получаем коэффициент модели', model.coef_[0], 'и константу', model.intercept_)
-st.write('Сейчас вы можете написать число % попадания первых подач (целое число) , и программа предскажет, какая доля из этих мячей выиграна.')
+st.write('Сейчас вы можете написать число % попадания первых подач (целое число) , и программа предскажет, какая доля(в процентах) из этих мячей выиграна.')
 number=st.number_input('Insert a number.')
 st.subheader(model.predict(pd.DataFrame([[number/100]], columns=["first serve %"]))[0]*100,'%')
             
