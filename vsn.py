@@ -75,4 +75,5 @@ folium.Choropleth(geo_data=gdfjson, data=an, columns=['name','num'],
                       legend_name='num',
                       highlight=True,
                       reset=True).add_to(m1)
+m1.add_child(folium.features.GeoJsonTooltip(['name'],labels=False)
 map1=st_folium(m1)
