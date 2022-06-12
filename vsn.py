@@ -59,7 +59,7 @@ st.markdown('Используя возможности numpy, посчитаем
 rat=np.array(a['rating'])
 mp=np.array(a['matches played'])
 aces=np.array(a['aces'])
-c1=st.multiselect('Между какими двумя параметрами рассчитаем матрицу корреляций.', a.columns[2:5])
+c1=st.multiselect('Между какими двумя параметрами рассчитаем матрицу корреляций.', a.columns[1::])
 st.write(np.corrcoef(np.array(a[c1[0]]),np.array(a[c1[1]])))
 
 
