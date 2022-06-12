@@ -57,9 +57,7 @@ gdf1=gpd.GeoDataFrame(gdf2, geometry='poly')
 gdf1
 gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner')
 gdften
-num=gdften['index_right'].value_counts()
-d=gdf1.merge(num,left_index=True,right_index=True)
-st.set_option('deprecation.showPyplotGlobalUse', False)
-fig,ax=plt.subplots(1,1)
-d.plot(column='index_right', ax=ax, cmap='PuRd', legend=True)
-st.pyplot(fig)
+num=gdften['name_right'].value_counts()
+an=gdf1.set_index('name').assign(num=num)
+st.write(an)
+
