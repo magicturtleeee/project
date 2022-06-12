@@ -47,6 +47,7 @@ fs=fs.reshape(1, -1)
 fsp=list(a['first serve points %'])
 fsp=[float(x[:-1]) for x in fsp]
 fsp=np.array(fsp)/100
+model = LinearRegression()
 model.fit(fs, fsp)
 st.write('Получаем коэффициент модели', model.coef_, 'и константу', model.intercept_)
             
