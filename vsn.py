@@ -96,8 +96,8 @@ with st.echo(code_location='below'):
             st.subheader('Сейчас покажем все теннисные корты Москвы на карте с помощью folium.')
             m = folium.Map([55.75364, 37.648280], zoom_start=10)
             for ind, row in gdf.iterrows():
-            folium.Marker([row.lon, row.lat],
-                          radius=12, fill_color='red').add_to(m)
+                        folium.Marker([row.lon, row.lat],
+                                      radius=12, fill_color='red').add_to(m)
             map=st_folium(m)
 
             st.subheader("Мне захотелось сделать красивую розовую визуализацию, поэтому давайте закрасим районы Москвы, в зависимости от того, сколько там теннисных кортов.")
