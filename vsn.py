@@ -88,11 +88,11 @@ st.markdown('Я как раз нашла, что в нашем турнире 12
 df11=pd.read_csv('aus2022.csv')
 st.write(df11.head())
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
-st.subheader("Используя api ключ с сайта data.mos, я получила данные в формате geojson. Так как streamlit не смог открыть российский сайт, я преобразовала данные в дата фрейм, сохранила в формате csv.")
+st.markdown("Используя api ключ с сайта data.mos, я получила данные в формате geojson. Так как streamlit не смог открыть российский сайт, я преобразовала данные в дата фрейм, сохранила в формате csv.")
 
 l=pd.read_csv('courts.csv')
 gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
-st.write(gdf)
+st.write(gdf.head())
 st.subheader('Сейчас покажем все теннисные корты Москвы на карте с помощью folium.')
 m = folium.Map([55.75364, 37.648280], zoom_start=10)
 for ind, row in gdf.iterrows():
