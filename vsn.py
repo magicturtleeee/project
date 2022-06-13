@@ -16,6 +16,16 @@ import networkx as nx
 import pydot
 from networkx.drawing.nx_pydot import graphviz_layout
 import graphviz
+#import pandas as pd
+#from selenium import webdriver
+#from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.common.by import By
+#from selenium.webdriver.chrome.service import Service
+#from webdriver_manager.chrome import ChromeDriverManager
+#import requests
+#import re
+#import sqlite3
+
 
 st.title('Финальный проект.')
 st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium, используя регулярные выражение, и сохранила в файл wta.csv. Это можно увидеть в tennis data.py. На всякий случай, продублирую в конце кода.')
@@ -72,7 +82,11 @@ fig, ax = plt.subplots()
 pos = nx.kamada_kawai_layout(T,)
 nx.draw(T,pos, with_labels=False)
 st.pyplot(fig)
-            
+
+st.markdown('Кстати, идея сделать граф похожим на турнирную сетку, пришла ко мне, когда я работала с таблицей в SQL в Питоне с помощью sqlite3. Код прикрепляю ниже и в tennis data.py')
+st.markdown('Я как раз нашла, что в нашем турнире 128 участниц, что победительницей является Ashleigh Barty. К сожалению, подключить SQL к Streamlit у меня не получилось, но я выведу скачанный из SQL csv файл, где указаны все матчи именно Australian Open (изначально в таблицы были все турниры).')
+df11=pd.read_csv('aus2022.csv')
+st.write(df11.head())
 st.subheader('Вспомнив про теннис, сразу захотелось пойти поиграть. Где же в Москве есть корты?')
 st.subheader("Используя api ключ с сайта data.mos, я получила данные в формате geojson. Так как streamlit не смог открыть российский сайт, я преобразовала данные в дата фрейм, сохранила в формате csv.")
 
@@ -117,14 +131,6 @@ choropleth.geojson.add_child(folium.features.GeoJsonTooltip(['name'],labels=Fals
 map1=st_folium(m1)
 
 #программа скачивания данных tennis_data.py
-#import pandas as pd
-#from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.chrome.service import Service
-#from webdriver_manager.chrome import ChromeDriverManager
-#import requests
-#import re
 
 # используя селениум, получаем данные про топ теннисисток из wta
 #driver = webdriver.Chrome('/Users/annagushchina/Downloads/chromedriver')
@@ -188,3 +194,29 @@ map1=st_folium(m1)
     #phone.append(r['features'][i]['properties']['Attributes']['HelpPhone_en'])
 #dfcourts=pd.DataFrame({'name':name,'address':ad, 'email':mail, 'website':web, 'phone': phone, 'lat':lat, 'lon':lon})
 #dfcourts.to_csv('courts.csv', index=False)
+
+#сейчас используем SQL для обработки данных с турниров. Сначала загрузим данные в базу.
+#df10=pd.read_csv('wta_matches_2022.csv')
+#conn=sqlite3.connect("database.sqlite")
+#c=conn.cursor()
+#df10.to_sql("wta", conn) #сейчас наша таблица есть в базе данных
+#c.execute(
+#"""
+#SELECT match_num FROM wta
+#WHERE tourney_name='Australian Open'
+#""").fetchall().   #узнавли, что номера матчей Australian open с 100 по 226 в таблице, найдем победительницу
+#win=c.execute(
+#"""
+#SELECT winner_name FROM wta
+#WHERE tourney_name='Australian Open' and match_num='226'
+#""").fetchall() # нашли победительницу 'Ashleigh Barty'
+#num=c.execute(
+#"""
+#SELECT COUNT (DISTINCT loser_name) AS number FROM wta 
+#WHERE tourney_name='Australian Open'
+#""").fetchall() #мы нашли, что проигравших 127, значит участников 127+победительница=128. Будем строить граф с матчами.
+#df11=pd.read_sql("""
+#SELECT * FROM wta 
+#WHERE tourney_name='Australian Open'
+#""", conn)
+#df11.to_csv("aus2022.csv") #нашли все данные про нужный нам турнир и сохранили в csv
