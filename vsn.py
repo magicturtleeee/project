@@ -30,7 +30,7 @@ with st.echo(code_location='below'):
             st.title('Финальный проект.')
             st.subheader('Проанализируем статистику топ-20 теннисисток из WTA. Данные я скачивала с помощью библиотеки selenium, используя регулярные выражение, и сохранила в файл wta.csv. Это можно увидеть в tennis data.py. На всякий случай, продублирую в конце кода.')
             a=pd.read_csv('wta.csv')
-            st.write(a)
+            #st.write(a)
 
             st.subheader('Сейчас давайте займемся визуализацией данных. Для этого используем библиотеку plotly.express. У вас есть возможность выбрать, в каком формате вы хотите видеть игрока (номер в рейтинге WTA или имя), выбрать, хотите ли видеть один параметр или несколько.')
             xpar=st.selectbox('В каком формате вы хотите увидеть игрока?', a.columns[:2])
@@ -92,7 +92,7 @@ with st.echo(code_location='below'):
 
             l=pd.read_csv('courts.csv')
             gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
-            st.write(gdf.head())
+            #st.write(gdf.head())
             st.subheader('Сейчас покажем все теннисные корты Москвы на карте с помощью folium.')
             m = folium.Map([55.75364, 37.648280], zoom_start=10)
             for ind, row in gdf.iterrows():
