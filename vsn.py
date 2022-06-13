@@ -103,10 +103,10 @@ map=st_folium(m)
 st.subheader("Мне захотелось сделать красивую розовую визуализацию, поэтому давайте закрасим районы Москвы, в зависимости от того, сколько там теннисных кортов.")
 gdfnew = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lat'], l['lon']))
 gdf2=pd.read_csv('moscow.csv')
-gdf2['poly']=gpd.GeoSeries.from_wkt(gdf2['poly'])
+gdf2['poly']=gpd.GeoSeries.from_wkt(gdf2['poly']) 
 gdf1=gpd.GeoDataFrame(gdf2, geometry='poly')
 gdf1.crs = "EPSG:4326"
-gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner')
+gdften=gdf1.sjoin(gdfnew,predicate="intersects",how='inner') #обрабатываем дата фреймы, считаем знасения, меняем индекс и т.д
 num=gdften['name_left'].value_counts()
 an=gdf1.set_index('name').assign(num=num)
 an.crs = "EPSG:4326"
