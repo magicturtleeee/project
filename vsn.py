@@ -96,7 +96,7 @@ with st.echo(code_location='below'):
             gdf = gpd.GeoDataFrame(l, geometry=gpd.points_from_xy(l['lon'], l['lat']))
             showdata=st.expander('Посмотреть данные.')
             with showdata:
-                        st.write(gdf.head())
+                        st.write(gdf)
             st.subheader('Сейчас покажем все теннисные корты Москвы на карте с помощью folium.')
             m = folium.Map([55.75364, 37.648280], zoom_start=10)
             for ind, row in gdf.iterrows():
@@ -224,3 +224,19 @@ with st.echo(code_location='below'):
             #WHERE tourney_name='Australian Open'
             #""", conn)
             #df11.to_csv("aus2022.csv") #нашли все данные про нужный нам турнир и сохранили в csv
+            
+            '''
+            Таким образом, в проекте использовались следующие технологии:
+            * обработка данных с помощью pandas;
+            * веп-скреппинг, используя selenium;
+            * работа с API (JSON) с использованием api key;
+            * визуализация данных (цветная карта, графики по статистическим показателям wta);
+            * numpy (арифметические операции с массивами, построение матрицу коэффициентов корреляции);
+            * streamlit;
+            * SQL (создание и использование базы данных с теннисными турнирами);
+            * регулярные выражения для облегчения поиска в коде страницы;
+            * работа с геоданными (geopandas, folium);
+            * построение графа с помощью networkx;
+            * машинное обучение (модель линейной регрессии);
+            * больше 120 строк.
+            '''
