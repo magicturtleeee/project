@@ -80,11 +80,12 @@ with st.echo(code_location='below'):
             st.subheader('Сейчас давайте посмотрим на один из турниров большого шлема, например, Australian Open. В основной сетке WTA 128 человек. Играют на вылет. Такую сетку удобно представить в форме графа с помощью библиотеки networkx.В центре победительница турнира, справа и слева от нее она и другая участница финала и т.д.')
             T = nx.generators.balanced_tree(2, 7)
             nx.draw(T)
+            ### FROM https://discuss.streamlit.io/t/streamlit-and-visualization-of-network-x-structures/19023
             fig, ax = plt.subplots()
             pos = nx.kamada_kawai_layout(T,)
             nx.draw(T,pos, with_labels=False)
             st.pyplot(fig)
-
+            ### END FROM
             st.markdown('Кстати, идея сделать граф похожим на турнирную сетку, пришла ко мне, когда я работала с таблицей в SQL в Питоне с помощью sqlite3. Код прикрепляю ниже и в tennis data.py')
             st.markdown('Я как раз нашла, что в нашем турнире 128 участниц, что победительницей является Ashleigh Barty. К сожалению, подключить SQL к Streamlit у меня не получилось, но я выведу скачанный из SQL csv файл, где указаны все матчи именно Australian Open (изначально в таблицы были все турниры).')
             df11=pd.read_csv('aus2022.csv')
@@ -226,6 +227,7 @@ with st.echo(code_location='below'):
             #df11.to_csv("aus2022.csv") #нашли все данные про нужный нам турнир и сохранили в csv
             
             '''
+            Ссылка на репозиторий github: https://github.com/magicturtleeee/project
             Таким образом, в проекте использовались следующие технологии:
             * обработка данных с помощью pandas;
             * веп-скреппинг, используя selenium;
